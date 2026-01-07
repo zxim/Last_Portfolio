@@ -244,6 +244,12 @@ export const WiresharkIcon = ({ className }: IconProps) => (
   </IconWrapper>
 );
 
+export const TensorFlowIcon = ({ className }: IconProps) => (
+  <IconWrapper className={className}>
+    <Image src="/svgs/stacks/tensorflow.png" alt="tensorflow" fill />
+  </IconWrapper>
+);
+
 // Placeholder icons for those not found in public/svgs/stacks/
 // These were previously imported by ProjectStacks.tsx
 export const GooglePlayConsoleIcon = GenericIcon;

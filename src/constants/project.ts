@@ -70,6 +70,10 @@ export const projectData: IProjectProps[] = [
       {
         issue: '협력사 공격 후 로그에서 어느 구간(망)에서 탐지되었는지 식별이 어려움.',
         solving: 'Suricata 로그에 구간별 태그를 삽입하고 Logstash 필터링 방식을 개선하여 로그 식별성을 확보함.'
+      },
+      {
+        issue: '협력사 공격 후 로그에서 어느 구간(망)에서 탐지되었는지 식별이 어려움.',
+        solving: 'Suricata 로그에 구간별 태그를 삽입하고 Logstash 필터링 방식을 개선하여 로그 식별성을 확보함.'
       }
     ],
     reason: "`AWS`는 실제 기업 환경과 가장 유사한 클라우드 보안 인프라를 구현하기 위해 선택했습니다. `Suricata`는 고성능 오픈소스 IDS/IPS로 네트워크 위협 탐지에 탁월하여 도입했으며, 방대한 보안 로그를 중앙에서 통합 분석하고 시각화하기 위해 `ELK Stack`을 연동했습니다.",
@@ -168,7 +172,7 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/zxim/System-Security-Automation',
     team: '4명 (멀티 OS 환경 구성 및 테스트)',
     contribution: { dev: '60%', infra: '50%', security: '30%' },
-    stacks: ['Ansible', 'AWS', 'Git', 'Kali Linux', 'MariaDB', 'MySQL', 'RedHat', 'Shell Script', 'Ubuntu'],
+    stacks: ['Ansible', 'AWS', 'Docker','Git', 'Kali Linux', 'MariaDB', 'MySQL', 'RedHat', 'Shell Script', 'Ubuntu'],
     issues: [
       {
         issue: 'Ubuntu와 RedHat(CentOS) 계열의 설정 파일 경로와 명령어가 달라 단일 스크립트로 진단 불가.',
@@ -242,7 +246,7 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/zxim/FarmApp-Android',
     team: '4명 (안드로이드/프론트엔드 담당)',
     contribution: { dev: '40%', infra: '50%', security: '60%' },
-    stacks: ['Android Studio', 'ARCore', 'AWS', 'Git', 'Java', 'MySQL', 'OpenCV', 'Python'],
+    stacks: ['Android Studio', 'ARCore', 'AWS', 'Git', 'Java', 'MySQL', 'OpenCV', 'Python', 'TensorFlow'],
     issues: [
       {
         issue: 'Unity로 제작한 AR 모델을 안드로이드에 연동 시 버전 충돌 및 패키징 오류 발생.',
@@ -279,7 +283,7 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/zxim/Automation-Drawing-AWS-Network-Topology',
     team: '개인 프로젝트',
     contribution: { dev: '100%', infra: '100%', security: '100%' },
-    stacks: ['AWS', 'Flask', 'Git', 'JavaScript', 'React', 'TypeScript'],
+    stacks: ['AWS', 'Flask', 'Git', 'JavaScript', 'Python','React', 'TypeScript'],
     issues: [
       {
         issue: 'AWS API 정보만으로는 서브넷이 퍼블릭인지 프라이빗인지 직접 구분 불가.',

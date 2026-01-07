@@ -1,0 +1,5 @@
+feat: Add GCP icon to project stacks
+
+- Added GcpIcon component to StackIcons/index.tsx.
+- Imported GcpIcon and mapped 'GCP' to it in ProjectStacks.tsx.
+- Added gcp.png to public/svgs/stacks/.
