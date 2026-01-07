@@ -7,7 +7,7 @@ import ArrowSVG from '@public/svgs/arrowRight.svg';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { isOpenProjectState, projectFilterState } from '@/atoms/project';
 import { IProjectProps } from '@/constants/project';
-import ProjectStacks from '@/components/Section/ProjectsSection/ProjectsList/Project/ProjectStakcs';
+import ProjectStacks from '@/components/Section/ProjectsSection/ProjectsList/Project/ProjectStacks';
 
 interface IProps {
   data: IProjectProps;

@@ -57,7 +57,7 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/zxim/AutoEver_Project', 
     team: '4명 (인프라 설계 및 보안 솔루션 구축 및 운영)',
     contribution: { dev: '50%', infra: '50%', security: '40%' },
-    stacks: ['AWS', 'Suricata (IPS)', 'ELK (SIEM)', 'PHP', 'Kali Linux', 'Ubuntu', 'Wireshark', 'Git'],
+    stacks: ['AWS', 'ELK (SIEM)', 'Git', 'Kali Linux', 'MySQL', 'PHP', 'Suricata (IPS)', 'Ubuntu', 'Wireshark'],
     issues: [
       {
         issue: '기본 라우팅 설정으로 인해 트래픽이 Suricata(IPS)를 거치지 않고 직접 전달되어 탐지가 우회되는 문제 발생.',
@@ -94,7 +94,7 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/zxim/Vulnerable-Web',
     team: '4명 (풀스택 개발 및 시큐어 코딩)',
     contribution: { dev: '70%', infra: '70%', security: '40%' },
-    stacks: ['PHP', 'JavaScript', 'HTML/CSS', 'Apache', 'MySQL', 'AWS', 'Kali Linux', 'Git', 'Burp Suite'],
+    stacks: ['Apache', 'AWS', 'Burp Suite', 'Git', 'JavaScript', 'Kali Linux', 'MySQL', 'PHP'],
     issues: [
       {
         issue: '사용자 입력값이 쿼리에 그대로 들어가 SQL Injection 발생 (인증 우회 가능).',
@@ -131,7 +131,7 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/zxim/IT_Security_3Team',
     team: '4명 (인프라 설계 및 테라폼 모듈 작성)',
     contribution: { dev: '60%', infra: '60%', security: '50%' },
-    stacks: ['Terraform', 'AWS', 'Docker', 'Suricata (IPS)','Git'],
+    stacks: ['AWS', 'Docker', 'Git', 'Suricata (IPS)', 'Terraform'],
     issues: [
       {
         issue: '사람의 눈으로 하는 코드 리뷰만으로는 Security Group 전체 개방(0.0.0.0/0)이나 암호화 미적용 같은 실수를 완벽히 차단하기 어려움.',
@@ -168,7 +168,7 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/zxim/System-Security-Automation',
     team: '4명 (멀티 OS 환경 구성 및 테스트)',
     contribution: { dev: '60%', infra: '50%', security: '30%' },
-    stacks: ['Ansible', 'AWS', 'Ubuntu', 'RedHat', 'Kali Linux','Shell Script', 'MariaDB', 'Git'],
+    stacks: ['Ansible', 'AWS', 'Git', 'Kali Linux', 'MariaDB', 'MySQL', 'RedHat', 'Shell Script', 'Ubuntu'],
     issues: [
       {
         issue: 'Ubuntu와 RedHat(CentOS) 계열의 설정 파일 경로와 명령어가 달라 단일 스크립트로 진단 불가.',
@@ -205,7 +205,7 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/orgs/MindSpace-Team/repositories',
     team: '팀 프로젝트 (보안 관제 및 데이터 설계)',
     contribution: { dev: '50%', infra: '50%', security: '80%' },
-    stacks: ['ELK (SIEM)', 'JavaScript','Spring Boot', 'MySQL', 'MongoDB', 'Node.js','Next.js', 'Git'],
+    stacks: ['ELK (SIEM)', 'Git', 'JavaScript', 'MongoDB', 'MySQL', 'Next.js', 'Node.js', 'Spring Boot', 'TypeScript'],
     issues: [
       {
         issue: '다양한 소스의 로그 형식이 통일되지 않아 통합 보안 분석에 어려움 발생.',
@@ -242,7 +242,7 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/zxim/FarmApp-Android',
     team: '4명 (안드로이드/프론트엔드 담당)',
     contribution: { dev: '40%', infra: '50%', security: '60%' },
-    stacks: ['Android Studio', 'Java', 'Python','ARCore', 'OpenCV', 'MySQL', 'Git', 'AWS'],
+    stacks: ['Android Studio', 'ARCore', 'AWS', 'Git', 'Java', 'MySQL', 'OpenCV', 'Python'],
     issues: [
       {
         issue: 'Unity로 제작한 AR 모델을 안드로이드에 연동 시 버전 충돌 및 패키징 오류 발생.',
@@ -279,7 +279,7 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/zxim/Automation-Drawing-AWS-Network-Topology',
     team: '개인 프로젝트',
     contribution: { dev: '100%', infra: '100%', security: '100%' },
-    stacks: ['React', 'JavaScript','TypeScript', 'Flask', 'Boto3', 'Cytoscape.js', 'Git', 'AWS'],
+    stacks: ['AWS', 'Flask', 'Git', 'JavaScript', 'React', 'TypeScript'],
     issues: [
       {
         issue: 'AWS API 정보만으로는 서브넷이 퍼블릭인지 프라이빗인지 직접 구분 불가.',
@@ -316,7 +316,7 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/zxim/Packet-Sniffer',
     team: '개인 프로젝트',
     contribution: { dev: '100%', infra: '100%', security: '100%' },
-    stacks: ['Python', 'Scapy', 'Matplotlib', 'NetworkX', 'Git'],
+    stacks: ['Git', 'Python'],
     issues: [
       {
         issue: '실행 환경마다 네트워크 인터페이스 이름(eth0, wlan0 등)이 달라 스니핑 실패.',
