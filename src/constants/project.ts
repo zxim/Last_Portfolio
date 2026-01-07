@@ -57,24 +57,24 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/zxim/AutoEver_Project', 
     team: '4명 (인프라 설계 및 보안 솔루션 구축 및 운영)',
     contribution: { dev: '50%', infra: '50%', security: '40%' },
-    stacks: ['AWS', 'ELK (SIEM)', 'Git', 'Kali Linux', 'MySQL', 'PHP', 'Suricata (IPS)', 'Ubuntu', 'Wireshark'],
+    stacks: ['Apache', 'AWS', 'ELK (SIEM)', 'Git', 'Kafka', 'Kali Linux', 'MySQL', 'PHP', 'Suricata (IPS)', 'Ubuntu', 'Wireshark'],
     issues: [
       {
         issue: '기본 라우팅 설정으로 인해 트래픽이 Suricata(IPS)를 거치지 않고 직접 전달되어 탐지가 우회되는 문제 발생.',
         solving: '퍼블릭/프라이빗 라우팅 테이블을 세분화하고, NAT/IGW가 반드시 Suricata 서브넷을 경유하도록 AWS 인프라 구조를 재설계하여 해결.'
       },
       {
-        issue: '웹쉘 업로드, Nmap 스캔 등 일부 공격이 기본 시그니처로 탐지되지 않음.',
-        solving: 'Suricata 최신 시그니처 업데이트 및 공격 패턴에 맞춘 커스텀 룰(Custom Rule)을 작성하여 탐지 커버리지를 확대함.'
+        issue: '공격 시연 리허설 중 대량의 로그가 일시에 유입되어 ELK 서버의 CPU/Memory가 고갈되고 프로세스가 비정상 종료되는 장애 발생.',
+        solving: 'AWS 스냅샷으로 신속히 서비스를 복구한 후, 로그 유실 방지 및 부하 분산을 위해 **Kafka(메시지 큐)**를 Logstash 앞단에 도입하여 트래픽을 버퍼링하고 처리 속도를 안정화함.'
+      },
+      {
+        issue: 'CVE-2019-0211(Apache 권한 상승) 재현을 위한 특정 버전 수동 컴파일 및 설정 정보가 부족하여 환경 구축에 난항을 겪음.',
+        solving: '해외 PoC 및 기술 문서를 심층 분석하여 필수 의존성과 설정값을 파악하고, 이를 AWS 환경에 맞게 적용하여 취약점 환경을 성공적으로 구축 및 공격을 시연함.'
       },
       {
         issue: '협력사 공격 후 로그에서 어느 구간(망)에서 탐지되었는지 식별이 어려움.',
         solving: 'Suricata 로그에 구간별 태그를 삽입하고 Logstash 필터링 방식을 개선하여 로그 식별성을 확보함.'
       },
-      {
-        issue: '협력사 공격 후 로그에서 어느 구간(망)에서 탐지되었는지 식별이 어려움.',
-        solving: 'Suricata 로그에 구간별 태그를 삽입하고 Logstash 필터링 방식을 개선하여 로그 식별성을 확보함.'
-      }
     ],
     reason: "`AWS`는 실제 기업 환경과 가장 유사한 클라우드 보안 인프라를 구현하기 위해 선택했습니다. `Suricata`는 고성능 오픈소스 IDS/IPS로 네트워크 위협 탐지에 탁월하여 도입했으며, 방대한 보안 로그를 중앙에서 통합 분석하고 시각화하기 위해 `ELK Stack`을 연동했습니다.",
     learned: '협력사부터 본사까지 이어지는 3계층 네트워크 보안망을 직접 설계하며 망 분리의 중요성을 체감했습니다. 실제 공격 시나리오(WannaCry, 웹해킹 등)를 수행하고 이를 방어하는 과정에서 공격자(Red Team)와 방어자(Blue Team)의 관점을 모두 경험하며, 단순한 솔루션 도입을 넘어선 "구조적 보안 설계"의 필요성을 깊이 배웠습니다.',
@@ -209,7 +209,7 @@ export const projectData: IProjectProps[] = [
     github: 'https://github.com/orgs/MindSpace-Team/repositories',
     team: '팀 프로젝트 (보안 관제 및 데이터 설계)',
     contribution: { dev: '50%', infra: '50%', security: '80%' },
-    stacks: ['ELK (SIEM)', 'Git', 'JavaScript', 'MongoDB', 'MySQL', 'Next.js', 'Node.js', 'Spring Boot', 'TypeScript'],
+    stacks: ['ELK (SIEM)', 'Git', 'Java', 'JavaScript', 'MongoDB', 'MySQL', 'Next.js', 'Node.js', 'Spring Boot', 'TypeScript'],
     issues: [
       {
         issue: '다양한 소스의 로그 형식이 통일되지 않아 통합 보안 분석에 어려움 발생.',

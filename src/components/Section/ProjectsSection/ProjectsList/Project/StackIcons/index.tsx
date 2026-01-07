@@ -250,6 +250,12 @@ export const TensorFlowIcon = ({ className }: IconProps) => (
   </IconWrapper>
 );
 
+export const KafkaIcon = ({ className }: IconProps) => (
+  <IconWrapper className={className}>
+    <Image src="/svgs/stacks/kafka.png" alt="kafka" fill />
+  </IconWrapper>
+);
+
 // Placeholder icons for those not found in public/svgs/stacks/
 // These were previously imported by ProjectStacks.tsx
 export const GooglePlayConsoleIcon = GenericIcon;
