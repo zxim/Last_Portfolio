@@ -1,29 +1,33 @@
 import styled from 'styled-components';
 import GithubSVG from '@public/svgs/github.svg';
 import LinkSVG from '@public/svgs/link.svg';
-import InstagramImg from '@public/images/instagram.png';
-import Image from 'next/image';
+import MailSVG from '@public/svgs/mail.svg';
+import { useSetRecoilState } from 'recoil';
+import { isEmailModalOpenState } from '@/atoms/modal';
 
 const ContactLinkList = (): JSX.Element => {
+  const setIsEmailModalOpen = useSetRecoilState(isEmailModalOpenState);
+
+  const handleEmailClick = () => {
+    setIsEmailModalOpen(true);
+  };
+
   return (
     <Container>
-      <ContactLink href='https://github.com/kimjy97' target='_blank'>
+      <ContactItem as="a" href='https://github.com/zxim' target='_blank'>
         <GithubIcon />
         <LinkIcon />
         <ContactIconText>GitHub</ContactIconText>
-      </ContactLink>
-      <ContactLink href='https://www.instagram.com/jjon9_yy' target='_blank'>
-        <InstagramIcon>
-          <Image src={InstagramImg} alt='instagram' />
-        </InstagramIcon>
-        <LinkIcon />
-        <ContactIconText>Instagram</ContactIconText>
-      </ContactLink>
-      <ContactLink href='https://kimjy.vercel.app' target='_blank'>
+      </ContactItem>
+      <ContactItem onClick={handleEmailClick}>
+        <EmailIcon />
+        <ContactIconText>Email</ContactIconText>
+      </ContactItem>
+      <ContactItem as="a" href='https://velog.io/@tlaals44/series' target='_blank'>
         <BlogText><p>BLOG</p></BlogText>
         <LinkIcon />
         <ContactIconText>개발 블로그</ContactIconText>
-      </ContactLink>
+      </ContactItem>
     </Container>
   )
 };
@@ -46,7 +50,7 @@ const Container = styled.div`
     font-size: 0.75rem;
   }
 `
-const ContactLink = styled.a`
+const ContactItem = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -75,12 +79,10 @@ const GithubIcon = styled(GithubSVG)`
   width: 3.25em;
   height: 6em;
 `
-const InstagramIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const EmailIcon = styled(MailSVG)`
   width: 3.25em;
   height: 6em;
+  fill: #fff;
 `
 const LinkIcon = styled(LinkSVG)`
   position: absolute;
@@ -92,7 +94,7 @@ const LinkIcon = styled(LinkSVG)`
   stroke: #2c2c33;
   transition: 100ms;
 
-  ${ContactLink}:hover &{
+  ${ContactItem}:hover &{
     stroke: #585863;
   }
 `

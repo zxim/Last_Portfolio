@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import SectionContainer from '@components/Section/SectionContainer';
 import { useScroll } from '@hooks/useScroll';
-import ContactForm from '@/components/Section/ContactSection/ContactForm';
+
 import ContactLinkList from '@/components/Section/ContactSection/ContactLinkList';
 
 const ContactSection = (): JSX.Element => {
@@ -21,22 +21,18 @@ const ContactSection = (): JSX.Element => {
         <ContentsWrapper className={className}>
           <FormText>
             <GlowingText>저의 포트폴리오를 봐주셔서 감사합니다!</GlowingText>
-            <p>관심있게 보셨다면 아래를 통해 저에게 연락주세요 <EmojiWrapper>🙇‍♂️</EmojiWrapper></p>
+            <p>아래 링크를 통해 저에 대해 더 알아보세요 <EmojiWrapper>🙇‍♂️</EmojiWrapper></p>
           </FormText>
 
           <ContactLinksWrapper>
             <ContactLinkList />
           </ContactLinksWrapper>
-
-          <FormWrapper>
-            <ContactForm />
-          </FormWrapper>
         </ContentsWrapper>
 
         <FooterSection>
           <FooterLine />
           <CopyRights>
-            Copyright © 2025. JongYeon All rights reserved.
+            Copyright © 2025. minshim All rights reserved.
           </CopyRights>
         </FooterSection>
       </Wrapper>
@@ -209,11 +205,7 @@ const ContactLinksWrapper = styled.div`
   }
 `;
 
-const FormWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
+
 
 const FooterSection = styled.div`
   position: absolute;

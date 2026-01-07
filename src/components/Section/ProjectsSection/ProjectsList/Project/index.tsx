@@ -47,12 +47,12 @@ const Project = ({ data }: IProps): JSX.Element => {
       <Row $marginBottom='1em'>
         <Info>
           <Term>{term}</Term>
-          <Units>{team ? '팀 프로젝트' : '개인 프로젝트'}</Units>
+          <Units>{team || '개인 프로젝트'}</Units>
         </Info>
       </Row>
       <BtnWrapper>
         {url && <LinkBtn href={url} target='_blank'>
-          <span>서비스 이동</span>
+          <span>Youtube 이동</span>
           <LinkIcon />
         </LinkBtn>}
         {github &&

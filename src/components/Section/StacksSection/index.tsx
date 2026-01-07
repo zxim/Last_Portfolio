@@ -1,34 +1,32 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import SectionContainer from '@components/Section/SectionContainer';
-import NextjsSVG from '@public/svgs/stacks/nextjs.svg';
-import TypescriptSVG from '@public/svgs/stacks/typescript.svg';
-import ReactSVG from '@public/svgs/stacks/react.svg';
-import JquerySVG from '@public/svgs/stacks/jquery.svg';
+
+// SVG and PNG Imports
+import JavascriptSVG from '@public/svgs/stacks/javascript.svg';
+import PythonSVG from '@public/svgs/stacks/python.svg';
+import PhpSVG from '@public/svgs/stacks/php.svg';
 import NodejsSVG from '@public/svgs/stacks/nodejs.svg';
-import MysqlSVG from '@public/svgs/stacks/mysql.svg';
-import MongodbSVG from '@public/svgs/stacks/mongodb.svg';
-import StyledComponentsSVG from '@public/svgs/stacks/styledcompoents.svg';
-import ScssSVG from '@public/svgs/stacks/scss.svg';
-import RecoilSVG from '@public/svgs/stacks/recoil.svg';
-import ZustandSVG from '@public/svgs/stacks/zustand.svg';
-import FigmaSVG from '@public/svgs/stacks/figma.svg';
-import PostmanSVG from '@public/svgs/stacks/postman.svg';
-import IllustratorSVG from '@public/svgs/stacks/illustrator.svg';
-import PhotoshopSVG from '@public/svgs/stacks/photoshop.svg';
-import VercelSVG from '@public/svgs/stacks/vercel.svg';
+import NextjsSVG from '@public/svgs/stacks/nextjs.svg';
 import AwsSVG from '@public/svgs/stacks/aws.svg';
-import GooglePlaySVG from '@public/svgs/stacks/googleplay.svg';
-import ExpoSVG from '@public/svgs/stacks/expo.svg';
-import SupabaseSVG from '@public/svgs/stacks/supabase.svg';
-import FirebaseSVG from '@public/svgs/stacks/firebase.svg';
-import TailwindCSSSVG from '@public/svgs/stacks/tailwindcss.svg';
-import ReactQuerySrc from '@public/images/stacks/reactquery.png';
+import GitSVG from '@public/svgs/stacks/git.svg';
+import MysqlSVG from '@public/svgs/stacks/mysql.svg';
+import MariadbSVG from '@public/svgs/stacks/mariadb.svg';
+import UbuntuSVG from '@public/svgs/stacks/ubuntu.svg';
+import KaliLinuxSVG from '@public/svgs/stacks/kalilinux.svg';
+import WiresharkSVG from '@public/svgs/stacks/wireshark.svg';
+import BurpSuiteSVG from '@public/svgs/stacks/burpsuite.svg';
+import ElasticStackSVG from '@public/svgs/stacks/elasticstack.svg';
+import SuricataPNG from '@public/svgs/stacks/suricata.png';
+import pfSensePNG from '@public/svgs/stacks/pfSense.png';
+import ModSecurityPNG from '@public/svgs/stacks/Modesecurity.png';
+
 import { useScroll } from '@hooks/useScroll';
 import Stack from '@components/Section/StacksSection/Stack';
 import Title from '@components/Section/Title';
-import { IProjectProps, projectData } from '@/constants/project';
+import { projectData } from '@/constants/project';
 import Image from 'next/image';
+import { useMemo } from 'react'; // Added useMemo
 
 const StacksSection = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false);
@@ -40,17 +38,35 @@ const StacksSection = (): JSX.Element => {
     rowRefs.current[index] = el;
   }, []);
 
-  const calculateStackCounts = useCallback(() => {
+  const stackCounts = useMemo(() => {
     const counts: { [key: string]: number } = {};
-    projectData.forEach((project: IProjectProps) => {
-      project.stacks.forEach((stack: string) => {
-        counts[stack] = (counts[stack] || 0) + 1;
+    projectData.forEach(project => {
+      project.stacks.forEach(stack => {
+        // Normalize stack names to match the format used in Stack component's onClick
+        // For example, "ELK Stack" in projectData should match "ELK (SIEM)" in Stack component
+        // This requires careful mapping or consistent naming.
+        // A more robust solution might involve a separate mapping constant.
+
+        // For simplicity, let's try to match the displayed name in Stack component
+        // This might need adjustment if the projectData stack names are very different
+        // from the displayed names in the Stack component.
+        if (stack.includes('ELK')) {
+          counts['ELK (SIEM)'] = (counts['ELK (SIEM)'] || 0) + 1;
+        } else if (stack.includes('Suricata')) {
+          counts['Suricata (IPS)'] = (counts['Suricata (IPS)'] || 0) + 1;
+        } else if (stack.includes('pfSense')) {
+          counts['pfSense (F/W)'] = (counts['pfSense (F/W)'] || 0) + 1;
+        } else if (stack.includes('ModSecurity')) {
+          counts['ModSecurity (WAF)'] = (counts['ModSecurity (WAF)'] || 0) + 1;
+        } else if (stack.includes('Kali')) {
+          counts['Kali Linux'] = (counts['Kali Linux'] || 0) + 1;
+        } else {
+          counts[stack] = (counts[stack] || 0) + 1;
+        }
       });
     });
     return counts;
-  }, []);
-
-  const stackCounts = calculateStackCounts();
+  }, []); // Removed projectData from dependency array
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -74,12 +90,13 @@ const StacksSection = (): JSX.Element => {
       }
     );
 
-    rowRefs.current.forEach((ref) => {
+    const currentRows = rowRefs.current; // Capture current value
+    currentRows.forEach((ref) => {
       if (ref) observer.observe(ref);
     });
 
     return () => {
-      rowRefs.current.forEach((ref) => {
+      currentRows.forEach((ref) => { // Use captured value in cleanup
         if (ref) observer.unobserve(ref);
       });
     };
@@ -100,42 +117,55 @@ const StacksSection = (): JSX.Element => {
         />
         <StackList>
           <StackItem>
-            <StackType $visible={visibleRows[0]}># FRONT-END & BACK-END</StackType>
+            <StackType $visible={visibleRows[0]}># Security Solutions</StackType>
             <StackRow ref={setRowRef(0)} $visible={visibleRows[0]}>
-              <Stack name='Next.js' icon={<NextjsIcon />} count={stackCounts['Next.js'] || 0} />
-              <Stack name='React.js' icon={<ReactIcon />} count={stackCounts['React'] || 0} />
-              <Stack name='ReactNative' icon={<ReactIcon />} count={stackCounts['ReactNative'] || 0} />
-              <Stack name='Expo' icon={<ExpoIcon />} count={stackCounts['Expo'] || 0} />
-              <Stack name='jQuery' icon={<JqueryIcon />} count={stackCounts['jQuery'] || 0} />
-              <Stack name='TypeScript' icon={<TypescriptIcon />} count={stackCounts['TypeScript'] || 0} />
-              <Stack name='Recoil' icon={<RecoilIcon />} count={stackCounts['Recoil'] || 0} />
-              <Stack name='Zustand' icon={<ZustandIcon />} count={stackCounts['Zustand'] || 0} />
-              <Stack name='ReactQuery' icon={<ReactQueryIcon src={ReactQuerySrc} alt='ReactQuery' />} count={stackCounts['ReactQuery'] || 0} />
-              <Stack name='Styled' name2='Components' icon={<StyledComponentsIcon />} count={stackCounts['StyledComponents'] || 0} />
-              <Stack name='TailwindCSS' icon={<TailwindCSSIcon />} count={stackCounts['TailwindCSS'] || 0} />
-              <Stack name='SCSS' icon={<ScssIcon />} count={stackCounts['SCSS'] || 0} />
-              <Stack name='Node.js' icon={<NodejsIcon />} count={stackCounts['Nodejs'] || 0} />
-              <Stack name='MongoDB' icon={<MongodbIcon />} count={stackCounts['MongoDB'] || 0} />
-              <Stack name='MySQL' icon={<MysqlIcon />} count={stackCounts['MySQL'] || 0} />
-              <Stack name='Supabase' icon={<SupabaseIcon />} count={stackCounts['Supabase'] || 0} />
-              <Stack name='Firebase' icon={<FirebaseIcon />} count={stackCounts['Firebase'] || 0} />
+              <Stack name='Suricata (IPS)' icon={<Image src={SuricataPNG} alt="Suricata" width={60} height={60} />} count={stackCounts['Suricata (IPS)'] || 0} />
+              <Stack name='pfSense (F/W)' icon={<Image src={pfSensePNG} alt="pfSense" width={60} height={60} />} count={stackCounts['pfSense (F/W)'] || 0} />
+              <Stack name='ModSecurity (WAF)' icon={<Image src={ModSecurityPNG} alt="ModSecurity" width={60} height={60} />} count={stackCounts['ModSecurity (WAF)'] || 0} />
+              <Stack name='ELK (SIEM)' icon={<ElasticStackIcon />} count={stackCounts['ELK (SIEM)'] || 0} />
             </StackRow>
           </StackItem>
           <StackItem>
-            <StackType $visible={visibleRows[1]}># DEPLOYMENT</StackType>
+            <StackType $visible={visibleRows[1]}># Languages</StackType>
             <StackRow ref={setRowRef(1)} $visible={visibleRows[1]}>
-              <Stack name='Vercel' icon={<VercelIcon />} count={stackCounts['Vercel'] || 0} />
-              <Stack name='AWS' icon={<AwsIcon />} count={stackCounts['AWS'] || 0} />
-              <Stack name='GooglePlay' name2='Console' icon={<GooglePlayIcon />} count={stackCounts['GooglePlayConsole'] || 0} />
+              <Stack name='JavaScript' icon={<JavascriptIcon />} count={stackCounts['JavaScript'] || 0} />
+              <Stack name='Python' icon={<PythonIcon />} count={stackCounts['Python'] || 0} />
+              <Stack name='PHP' icon={<PhpIcon />} count={stackCounts['PHP'] || 0} />
             </StackRow>
           </StackItem>
           <StackItem>
-            <StackType $visible={visibleRows[2]}># TOOLS</StackType>
+            <StackType $visible={visibleRows[2]}># Tools</StackType>
             <StackRow ref={setRowRef(2)} $visible={visibleRows[2]}>
-              <Stack name='Postman' icon={<PostmanIcon />} count={stackCounts['Postman'] || 0} />
-              <Stack name='Figma' icon={<FigmaIcon />} count={stackCounts['Figma'] || 0} />
-              <Stack name='illustrator' icon={<IllustratorIcon />} count={stackCounts['Illustrator'] || 0} />
-              <Stack name='Photoshop' icon={<PhotoshopIcon />} count={stackCounts['Photoshop'] || 0} />
+              <Stack name='Wireshark' icon={<WiresharkIcon />} count={stackCounts['Wireshark'] || 0} />
+              <Stack name='Burp Suite' icon={<BurpSuiteIcon />} count={stackCounts['Burp Suite'] || 0} />
+            </StackRow>
+          </StackItem>
+          <StackItem>
+            <StackType $visible={visibleRows[3]}># Frameworks</StackType>
+            <StackRow ref={setRowRef(3)} $visible={visibleRows[3]}>
+              <Stack name='Node.js' icon={<NodejsIcon />} count={stackCounts['Node.js'] || 0} />
+              <Stack name='Next.js' icon={<NextjsIcon />} count={stackCounts['Next.js'] || 0} />
+            </StackRow>
+          </StackItem>
+          <StackItem>
+            <StackType $visible={visibleRows[4]}># Operating Systems</StackType>
+            <StackRow ref={setRowRef(4)} $visible={visibleRows[4]}>
+              <Stack name='Ubuntu' icon={<UbuntuIcon />} count={stackCounts['Ubuntu'] || 0} />
+              <Stack name='Kali Linux' icon={<KaliLinuxIcon />} count={stackCounts['Kali Linux'] || 0} />
+            </StackRow>
+          </StackItem>
+          <StackItem>
+            <StackType $visible={visibleRows[5]}># Etc</StackType>
+            <StackRow ref={setRowRef(5)} $visible={visibleRows[5]}>
+              <Stack name='AWS' icon={<AwsIcon />} count={stackCounts['AWS'] || 0} />
+              <Stack name='Git' icon={<GitIcon />} count={stackCounts['Git'] || 0} />
+            </StackRow>
+          </StackItem>
+          <StackItem>
+            <StackType $visible={visibleRows[6]}># Databases</StackType>
+            <StackRow ref={setRowRef(6)} $visible={visibleRows[6]}>
+              <Stack name='MySQL' icon={<MysqlIcon />} count={stackCounts['MySQL'] || 0} />
+              <Stack name='MariaDB' icon={<MariadbIcon />} count={stackCounts['MariaDB'] || 0} />
             </StackRow>
           </StackItem>
         </StackList>
@@ -237,96 +267,63 @@ const StackRow = styled.div<{ $visible: boolean }>`
     grid-template-columns: 1fr 1fr 1fr;
   }
 `
-const NextjsIcon = styled(NextjsSVG)`
-  width: 5em;
-  height: 5em;
-`
-const TypescriptIcon = styled(TypescriptSVG)`
-  width: 4em;
-  height: 4em;
-`
-const ReactIcon = styled(ReactSVG)`
+// Styled components for icons
+const JavascriptIcon = styled(JavascriptSVG)`
   width: 4.375em;
   height: 4.375em;
-`
-const JqueryIcon = styled(JquerySVG)`
-  width: 4em;
-  height: 4em;
-`
+`;
+const PythonIcon = styled(PythonSVG)`
+  width: 4.375em;
+  height: 4.375em;
+`;
+const PhpIcon = styled(PhpSVG)`
+  width: 4.375em;
+  height: 4.375em;
+`;
 const NodejsIcon = styled(NodejsSVG)`
   width: 5.5em;
   height: 5.5em;
   margin-bottom: -0.625em;
-`
-const MysqlIcon = styled(MysqlSVG)`
-  width: 5.5em;
-  height: 5.5em;
-`
-const MongodbIcon = styled(MongodbSVG)`
-  width: 4em;
-  height: 4em;
-`
-const StyledComponentsIcon = styled(StyledComponentsSVG)`
-  width: 5.5em;
-  height: 5.5em;
-`
-const ScssIcon = styled(ScssSVG)`
-  width: 4.875em;
-  height: 4.875em;
-`
-const RecoilIcon = styled(RecoilSVG)`
-  width: 3.5em;
-  height: 3.5em;
-`
-const ZustandIcon = styled(ZustandSVG)`
-  width: 4.25em;
-  height: 4.25em;
-`
-const FigmaIcon = styled(FigmaSVG)`
-  width: 3.75em;
-  height: 3.75em;
-`
-const PostmanIcon = styled(PostmanSVG)`
-  width: 4.25em;
-  height: 4.25em;
-`
-const IllustratorIcon = styled(IllustratorSVG)`
-  width: 4em;
-  height: 4em;
-`
-const PhotoshopIcon = styled(PhotoshopSVG)`
-  width: 4em;
-  height: 4em;
-`
-const VercelIcon = styled(VercelSVG)`
+`;
+const NextjsIcon = styled(NextjsSVG)`
   width: 5em;
   height: 5em;
-`
+`;
 const AwsIcon = styled(AwsSVG)`
   width: 5em;
   height: 5em;
-`
-const GooglePlayIcon = styled(GooglePlaySVG)`
-  width: 3.8em;
-  height: 3.8em;
-`
-const ExpoIcon = styled(ExpoSVG)`
-  width: 3.8em;
-  height: 3.8em;
-`
-const SupabaseIcon = styled(SupabaseSVG)`
-  width: 3.8em;
-  height: 3.8em;
-`
-const FirebaseIcon = styled(FirebaseSVG)`
-  width: 3.8em;
-  height: 3.8em;
-`
-const TailwindCSSIcon = styled(TailwindCSSSVG)`
-  width: 3.8em;
-  height: 3.8em;
-`
-const ReactQueryIcon = styled(Image)`
-  width: 4.25em;
-  height: 4.25em;
-`
+`;
+const GitIcon = styled(GitSVG)`
+  width: 4.375em;
+  height: 4.375em;
+`;
+const MysqlIcon = styled(MysqlSVG)`
+  width: 5.5em;
+  height: 5.5em;
+`;
+const MariadbIcon = styled(MariadbSVG)`
+  width: 4.375em;
+  height: 4.375em;
+`;
+const UbuntuIcon = styled(UbuntuSVG)`
+  width: 4.375em;
+  height: 4.375em;
+`;
+const KaliLinuxIcon = styled(KaliLinuxSVG)`
+  width: 4.375em;
+  height: 4.375em;
+`;
+const WiresharkIcon = styled(WiresharkSVG)`
+  width: 4.375em;
+  height: 4.375em;
+`;
+const BurpSuiteIcon = styled(BurpSuiteSVG)`
+  width: 4.375em;
+  height: 4.375em;
+`;
+const ElasticStackIcon = styled(ElasticStackSVG)`
+  width: 4.375em;
+  height: 4.375em;
+`;
+
+

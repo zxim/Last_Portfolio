@@ -94,141 +94,147 @@ const ProjectModal = () => {
 
   return (
     <>
-      <Container className={isOpen ? 'visible' : ''}>
-        <Top>
-          <ExitBtn onClick={handleClose}>
-            <CrossIcon />
-          </ExitBtn>
-        </Top>
-        <Body ref={bodyRef}>
-          <BackColor>
-            {info && <Image src={info.thumb[thumbNum]} alt={`${info.name}(Thumbnail)_${thumbNum}`} />}
-          </BackColor>
-          {info && (
-            <MockUp className={MockUpClassName}>
-              <Image
-                ref={imgRef}
-                src={info.thumb[thumbNum]}
-                alt={`${info.name}(Thumbnail)_${thumbNum}`}
-                onClick={handleImageClick}
-                style={{ cursor: 'pointer' }}
-              />
-              <SelectThumbList ref={imgListRef}>
-                {info.thumb.map((i: StaticImageData, idx: number) =>
-                  <SelectThumb
-                    key={idx * randomKey}
-                    className={idx === thumbNum ? 'selected' : ''}
-                    src={i}
-                    alt={`${info.name}(Thumbnail)_${idx}`}
-                    onClick={() => setThumbNum(idx)}
+      {isOpen && ( // Conditionally render the overlay
+        <ModalOverlay onClick={handleClose}>
+          <Container className={isOpen ? 'visible' : ''}> {/* Removed onClick from Container */}
+            <Top>
+              <ExitBtn onClick={handleClose}>
+                <CrossIcon />
+              </ExitBtn>
+            </Top>
+            <Body ref={bodyRef} onClick={(e) => e.stopPropagation()}>
+              <BackColor>
+                {info && <Image src={info.thumb[thumbNum]} alt={`${info.name}(Thumbnail)_${thumbNum}`} />}
+              </BackColor>
+              {info && (
+                <MockUp className={MockUpClassName}>
+                  <Image
+                    ref={imgRef}
+                    src={info.thumb[thumbNum]}
+                    alt={`${info.name}(Thumbnail)_${thumbNum}`}
+                    onClick={handleImageClick}
+                    style={{ cursor: 'pointer' }}
                   />
-                )}
-              </SelectThumbList>
-            </MockUp>
+                  {info.thumb.length > 1 && ( // Only render SelectThumbList if there's more than 1 image
+            <SelectThumbList ref={imgListRef} $thumbCount={info.thumb.length}>
+              {info.thumb.map((i: StaticImageData, idx: number) =>
+                <SelectThumb
+                  key={idx * randomKey}
+                  className={idx === thumbNum ? 'selected' : ''}
+                  src={i}
+                  alt={`${info.name}(Thumbnail)_${idx}`}
+                  onClick={() => setThumbNum(idx)}
+                />
+              )}
+            </SelectThumbList>
           )}
-          <Contents ref={contentsRef} className={isScroll ? 'visible' : 'unVisible'}>
-            <ContentsWrapper className={isScroll ? 'visible' : 'unVisible'}>
-              <Name>
-                <DocumentIcon />
-                <p>{info?.name}</p>
-              </Name>
-              <Status>
-                <StatusService>
-                  <StatusLight />
-                  <p>서비스 중</p>
-                </StatusService>
-                {info?.url && <LinkBtn href={info?.url} target='_blank'>
-                  <span>사이트 바로가기</span>
-                  <LinkIcon />
-                </LinkBtn>}
-                {info?.github ?
-                  <LinkBtn href={info?.github} target='_blank'>
-                    <span>GitHub 바로가기</span>
-                    <LinkIcon />
-                  </LinkBtn>
-                  : null
-                }
-              </Status>
-              <Info>
-                <Intro>
-                  <p>INTRO.</p>
-                  {info?.intro}
-                </Intro>
-                <InfoRow>
-                  <Label>⏱️ 개발 기간</Label>
-                  <InfoText>
-                    {`${info?.term} ${info?.termDiff ? `(${info?.termDiff})` : ''}`}
-                  </InfoText>
-                </InfoRow>
-                <InfoRow>
-                  <Label>👥 구성원</Label>
-                  <InfoText>
-                    {info?.team || '개인 프로젝트'}
-                  </InfoText>
-                </InfoRow>
-                <InfoRow>
-                  <Label>기여도</Label>
-                  <ContributionList>
-                    {info?.contribution.dev ? <Contribution>
+                </MockUp>
+              )}
+              <Contents ref={contentsRef} className={isScroll ? 'visible' : 'unVisible'}>
+                <ContentsWrapper className={isScroll ? 'visible' : 'unVisible'}>
+                  <Name>
+                    <DocumentIcon />
+                    <p>{info?.name}</p>
+                  </Name>
+                  <Status>
+                    <StatusService>
+                      <StatusLight />
+                      <p>GitHub</p>
+                    </StatusService>
+                    {info?.url && <LinkBtn href={info?.url} target='_blank'>
+                      <span>Youtube 바로가기</span>
+                      <LinkIcon />
+                    </LinkBtn>}
+                    {info?.github ?
+                      <LinkBtn href={info?.github} target='_blank'>
+                        <span>GitHub 바로가기</span>
+                        <LinkIcon />
+                      </LinkBtn>
+                      : null
+                    }
+                  </Status>
+                  <Info>
+                    <Intro>
+                      <p>INTRO.</p>
+                      {info?.intro}
+                    </Intro>
+                    <InfoRow>
+                      <Label>⏱️ 개발 기간</Label>
+                      <InfoText>
+                        {`${info?.term} ${info?.termDiff ? `(${info?.termDiff})` : ''}`}
+                      </InfoText>
+                    </InfoRow>
+                    <InfoRow>
+                      <Label>👥 구성원</Label>
+                      <InfoText>
+                        {info?.team || '개인 프로젝트'}
+                      </InfoText>
+                    </InfoRow>
+                    <InfoRow>
+                      <Label>기여도</Label>
+                      <ContributionList>
+                        {info?.contribution.dev ? <Contribution>
                       <span>개발</span>
                       {info?.contribution.dev}
                     </Contribution>
                       : null
                     }
-                    {info?.contribution.design ? <Contribution>
-                      <span>디자인</span>
-                      {info?.contribution.design}
+                    {info?.contribution.infra ? <Contribution>
+                      <span>인프라</span>
+                      {info?.contribution.infra}
                     </Contribution>
                       : null
                     }
-                    {info?.contribution.planning ? <Contribution>
-                      <span>기획</span>
-                      {info?.contribution.planning}
+                    {info?.contribution.security ? <Contribution>
+                      <span>보안</span>
+                      {info?.contribution.security}
                     </Contribution>
                       : null
                     }
-                  </ContributionList>
-                </InfoRow>
-                <InfoRow>
-                  <Label>🛠️ 사용된 기술 스택</Label>
-                  <StackList>
-                    {info?.stacks.map((i: string, idx: number) =>
-                      <Stack key={idx}>{i}</Stack>
-                    )}
-                  </StackList>
-                </InfoRow>
-                {(info?.func && info?.func.length > 0) &&
-                  <InfoRow>
-                    <Label>⚡ 주요 기능</Label>
-                    <FuncList info={info} />
-                  </InfoRow>
-                }
-              </Info>
-              <DetailInfo>
-                <InfoRow>
-                  <BlackLabel>🤔 기술 선정 이유</BlackLabel>
-                  <ReasonText info={info} />
-                </InfoRow>
-                <InfoRow>
-                  <BlackLabel>🐛 개발 이슈</BlackLabel>
-                  <Issue info={info} />
-                </InfoRow>
-                <InfoRow>
-                  <BlackLabel>💭 개발 후 느낀점</BlackLabel>
-                  <DetailInfoText>
-                    <StyledText>{info?.learned}</StyledText>
-                  </DetailInfoText>
-                </InfoRow>
-              </DetailInfo>
-            </ContentsWrapper>
-          </Contents>
-        </Body>
-        <ScrollGradient className={!isScroll ? 'unVisible' : ''} />
-        <ScrollNote className={!isScroll ? 'unVisible' : ''}>
-          <ArrowDownIcon />
-          <p>스크롤을 내리면 프로젝트 정보를 볼 수 있습니다.</p>
-        </ScrollNote>
-      </Container>
+                      </ContributionList>
+                    </InfoRow>
+                    <InfoRow>
+                      <Label>🛠️ 사용된 기술 스택</Label>
+                      <StackList>
+                        {info?.stacks.map((i: string, idx: number) =>
+                          <Stack key={idx}>{i}</Stack>
+                        )}
+                      </StackList>
+                    </InfoRow>
+                    {(info?.func && info?.func.length > 0) &&
+                      <InfoRow>
+                        <Label>⚡ 주요 기능</Label>
+                        <FuncList info={info} />
+                      </InfoRow>
+                    }
+                  </Info>
+                  <DetailInfo>
+                    <InfoRow>
+                      <BlackLabel>🤔 기술 선정 이유</BlackLabel>
+                      <ReasonText info={info} />
+                    </InfoRow>
+                    <InfoRow>
+                      <BlackLabel>🐛 개발 이슈</BlackLabel>
+                      <Issue info={info} />
+                    </InfoRow>
+                    <InfoRow>
+                      <BlackLabel>💭 개발 후 느낀점</BlackLabel>
+                      <DetailInfoText>
+                        <StyledText>{info?.learned}</StyledText>
+                      </DetailInfoText>
+                    </InfoRow>
+                  </DetailInfo>
+                </ContentsWrapper>
+              </Contents>
+            </Body>
+            <ScrollGradient className={!isScroll ? 'unVisible' : ''} />
+            <ScrollNote className={!isScroll ? 'unVisible' : ''}>
+              <ArrowDownIcon />
+              <p>스크롤을 내리면 프로젝트 정보를 볼 수 있습니다.</p>
+            </ScrollNote>
+          </Container>
+        </ModalOverlay>
+      )}
 
       {/* 전체 화면 이미지 모달 */}
       {isImageModalOpen && info && (
@@ -249,6 +255,30 @@ const ProjectModal = () => {
 };
 
 export default ProjectModal;
+
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure it's above other content but below image modal */
+  backdrop-filter: blur(4px); /* Optional: adds a blur effect */
+  animation: fadeIn 0.2s ease-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+`;
 
 const flashAni = keyframes`
   0% {
@@ -794,9 +824,9 @@ const Intro = styled.div`
     font-size: 0.875em;
   }
 `
-const SelectThumbList = styled.div`
+const SelectThumbList = styled.div<{ $thumbCount: number }>`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: ${({ $thumbCount }) => `repeat(${$thumbCount}, 1fr)`};
   gap: 1.25em;
   width: 75%;
   max-width: 80em;

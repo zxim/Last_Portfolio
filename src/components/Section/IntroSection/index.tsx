@@ -16,7 +16,7 @@ const IntroSection = (): JSX.Element => {
       <Background />
       <Wrapper style={{ opacity }}>
         <Typo>
-          <MainTypo>FRONT-END DEV.</MainTypo>
+          <MainTypo>SECURITY ENGINEER</MainTypo>
           <SubTypo>PORTFOLIO</SubTypo>
         </Typo>
         <ArrowDown>

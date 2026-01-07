@@ -1,12 +1,14 @@
 'use client'
 
 import ProjectModal from '@/components/Modals/ProjectModal.tsx';
+import EmailModal from '@/components/Modals/EmailModal';
 import styled from 'styled-components';
 
 const Modals = (): JSX.Element => {
   return (
     <Container>
       <ProjectModal />
+      <EmailModal />
     </Container>
   )
 };

@@ -32,7 +32,7 @@ export const useVisitorTracking = () => {
 
   useEffect(() => {
     trackPageView();
-  }, []);
+  }, [trackPageView]);
 
   return { trackPageView };
 };

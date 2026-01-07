@@ -20,6 +20,7 @@
     "recoil": "^0.7.7",
     "sass": "^1.78.0",
     "sharp": "^0.33.5",
+    "simple-icons": "^16.4.0",
     "styled-components": "^6.1.13"
   },
   "devDependencies": {

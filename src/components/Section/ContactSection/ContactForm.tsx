@@ -101,7 +101,7 @@ const ContactForm = (): JSX.Element => {
     >
       <Note>
         <IconMail />
-        메시지는 <EmailHighlight>poot972@gmail.com</EmailHighlight>으로 전송됩니다.
+        메시지는 <EmailHighlight>tlaals44@naver.com</EmailHighlight>으로 전송됩니다.
       </Note>
       <FormField className={inputValues.from_name ? 'has-value' : ''}>
         <FormInput

@@ -25,7 +25,7 @@ const SortOption = (): JSX.Element | null => {
     if (section !== 'projects') {
       setSeletedStacks([]);
     }
-  }, [section])
+  }, [section, setSeletedStacks])
 
   return selectedStacks.length > 0 ? (
     <Container id='sortOption'>

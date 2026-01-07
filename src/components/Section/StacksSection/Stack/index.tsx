@@ -27,7 +27,7 @@ const Stack = ({ name, name2, icon, count }: IProps): JSX.Element => {
       await smoothScrollTo(targetPosition, 450);
       router.replace(`/?section=projects`, { scroll: false });
     }
-  }, [setSeletedStacks, router]);
+  }, [setSeletedStacks, router, count]);
 
   const updateElementPosition = useCallback(() => {
     if (containerRef.current) {
