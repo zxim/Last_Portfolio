@@ -9,15 +9,7 @@ interface StackIconsType {
 const stackIcons: StackIconsType = {
   'Next.js': NextjsIcon,
   TypeScript: TypescriptIcon,
-  Recoil: null,
-  StyledComponents: null,
   MongoDB: MongodbIcon,
-  Vercel: null,
-  ReactNative: null,
-  GooglePlayConsole: null,
-  TailwindCSS: null,
-  Zustand: null,
-  ReactQuery: null,
   AWS: AwsIcon,
   'Suricata (IPS)': SuricataIcon,
   'ELK (SIEM)': ElkIcon,
@@ -46,10 +38,6 @@ const stackIcons: StackIconsType = {
   OpenCV: OpencvIcon,
   React: ReactIcon,
   Flask: FlaskIcon,
-  Boto3: null,
-  'Cytoscape.js': null,
-  Matplotlib: null,
-  NetworkX: null,
 };
 
 const ProjectStacksContainer = styled.div`
