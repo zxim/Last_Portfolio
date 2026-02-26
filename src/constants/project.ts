@@ -26,6 +26,11 @@ import BlogAdminThumbImg from '@public/images/thumbnails/blogadmin.png';
 import BlogAdminImg1 from '@public/images/projects/blogadmin_1.png';
 import BlogAdminImg2 from '@public/images/projects/blogadmin_2.png';
 import BlogAdminImg3 from '@public/images/projects/blogadmin_3.png';
+import N8nThumbImg from '@public/images/thumbnails/n8n_flow.png';
+import N8nImg1 from '@public/images/projects/n8n1.png';
+import N8nImg2 from '@public/images/projects/n8n2.png';
+import N8nImg3 from '@public/images/projects/n8n3.png';
+import N8nImg4 from '@public/images/projects/n8n4.png';
 import { StaticImageData } from 'next/image';
 import PacketIMG from '@public/images/thumbnails/packet.png';
 
@@ -47,6 +52,47 @@ export interface IProjectProps {
 }
 
 export const projectData: IProjectProps[] = [
+  // 0. n8n 기반 자동화 구축
+  {
+    thumb: [N8nThumbImg, N8nImg1, N8nImg2, N8nImg3, N8nImg4],
+    term: '2026.02 ~ 2026.03',
+    termDiff: '1개월',
+    name: '구글 드라이브 자산 통제 및 중앙 관리 플랫폼',
+    url: '',
+    github: '',
+    team: '회사 프로젝트',
+    contribution: { dev: '100%', infra: '100%', security: '100%' },
+    stacks: ['Google Cloud Platform', 'MySQL', 'n8n', 'JavaScript'],
+    issues: [
+      {
+        issue: '사용자가 파일 소유권 이전을 거부할 경우, 외부 유출(다운로드 등) 통제 및 실시간 모니터링 불가',
+        solving: '소유권 미이전 시 해당 파일 내용을 강제로 초기화하는 대응 로직을 구현하여 자산 보호 강제성 확보'
+      },
+      {
+        issue: '구글 파일과 MS 파일 구조 차이로 인해 파일 내용 수정 API 요청 시 빈번한 에러 발생',
+        solving: '자체 파일 업로드 프록시 서버를 구축하여 MS 파일을 표준화된 방식으로 수신 후, 자동화 엔진을 통해 구글 드라이브로 안정적 업로드 구현'
+      },
+      {
+        issue: '개인별 참여 중인 수많은 파일과 권한 범위를 한눈에 파악하기 힘들어 퇴사 혹은 육아 휴직 시 권한 회수 누수 발생',
+        solving: 'MySQL 기반 보안 그룹 및 화이트리스트를 도입하여, 파일별 접근 권한을 DB화하고 비인가 권한을 실시간으로 자동 탐지·삭제 처리'
+      },
+      {
+        issue: '기능 확장으로 인해 n8n 워크플로우가 15개 이상으로 늘어나며 전체 흐름 파악 및 관리 복잡도 증가',
+        solving: '각 기능을 모듈화하고 이를 통합 제어하는 마스터 워크플로우 체계를 구축하여 운영 효율성 및 인수인계 편의성 극대화'
+      }
+    ],
+    reason: "구글 기본 관리 기능의 한계를 넘기 위해 API 직접 제어 방식을 택했으며, n8n으로 복잡한 보안 로직을 시각화하여 유지보수 효율을 극대화했습니다. 여기에 MySQL을 정책 저장소로 연동해 실시간 파일 상태 기록과 화이트리스트 대조를 자동화함으로써, 상용 솔루션 없이도 저비용·고효율의 맞춤형 보안 엔진을 구현했습니다.",
+    learned: '보안은 단순히 통제하는 것이 아니라, 사용자가 인지하지 못하는 사이 시스템이 자동으로 보호하는 것이 핵심임을 배웠습니다',
+    intro: '개인 중심의 구글 드라이브 환경을 기업 환경에 맞게 강제 제어하고 중앙 집중화하는 보안 자동화 프로젝트입니다. 임직원의 부주의나 고의에 의한 데이터 유출(다운로드, 복사, 인쇄 등)을 원천 차단하고, 파일 소유권을 회사로 즉시 환수하여 기업 자산의 안전성을 확보하는 시스템을 구축했습니다.',
+    func: [
+      'n8n 기반의 보안 자동화 엔진 설계 및 전사 자산 통제 워크플로우 구축',
+      '최소 권한 원칙 적용을 통한 외부 유출 경로(복사/인쇄/다운로드) 원천 차단',
+      'MySQL 연동을 통한 동적 화이트리스트 검증 및 비인가 협업자 자동 숙청 로직 구현',
+      '사용자 행위 기반 이상 징후 실시간 모니터링 및 위협 가시성 확보',
+      'n8n과 자체 서버를 활용한 자동화 시스템 구축으로 추가 라이선스 비용 제로화'
+    ],
+  },
+
   // 1. 현대오토에버 최종 프로젝트 (침해사고 분석 및 대응)
   {
     thumb: [PortfolioThumbImg, PortfolioImg1, PortfolioImg2, PortfolioImg3],

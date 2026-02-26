@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AwsIcon, BurpsuiteIcon, ElkIcon, GitIcon, JavascriptIcon, KaliLinuxIcon, MariadbIcon, MysqlIcon, NextjsIcon, NodejsIcon, PhpIcon, PythonIcon, SuricataIcon, UbuntuIcon, WiresharkIcon, AndroidStudioIcon, AnsibleIcon, ApacheIcon, ArCoreIcon, DockerIcon, FlaskIcon, HtmlIcon, JavaIcon, MongodbIcon, OpencvIcon, ReactIcon, RedhatIcon, ShellScriptIcon, SpringBootIcon, TerraformIcon, TypescriptIcon, TensorFlowIcon, KafkaIcon } from '@/components/Section/ProjectsSection/ProjectsList/Project/StackIcons';
+import { AwsIcon, BurpsuiteIcon, ElkIcon, GitIcon, JavascriptIcon, KaliLinuxIcon, MariadbIcon, MysqlIcon, N8nIcon, NextjsIcon, NodejsIcon, PhpIcon, PythonIcon, SuricataIcon, UbuntuIcon, WiresharkIcon, AndroidStudioIcon, AnsibleIcon, ApacheIcon, ArCoreIcon, DockerIcon, FlaskIcon, HtmlIcon, JavaIcon, MongodbIcon, OpencvIcon, ReactIcon, RedhatIcon, ShellScriptIcon, SpringBootIcon, TerraformIcon, TypescriptIcon, TensorFlowIcon, KafkaIcon } from '@/components/Section/ProjectsSection/ProjectsList/Project/StackIcons';
 interface StackIconsType {
   [key: string]: React.ElementType;
 }
@@ -39,6 +39,7 @@ const stackIcons: StackIconsType = {
   Flask: FlaskIcon,
   'TensorFlow': TensorFlowIcon,
   'Kafka': KafkaIcon,
+  'n8n': N8nIcon,
 };
 
 const ProjectStacksContainer = styled.div`

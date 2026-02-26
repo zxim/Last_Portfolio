@@ -17,6 +17,7 @@ import KaliLinuxSVG from '@public/svgs/stacks/kalilinux.svg';
 import WiresharkSVG from '@public/svgs/stacks/wireshark.svg';
 import BurpSuiteSVG from '@public/svgs/stacks/burpsuite.svg';
 import ElasticStackSVG from '@public/svgs/stacks/elasticstack.svg';
+import N8nSVG from '@public/svgs/stacks/n8n.svg';
 import SuricataPNG from '@public/svgs/stacks/suricata.png';
 import pfSensePNG from '@public/svgs/stacks/pfSense.png';
 import ModSecurityPNG from '@public/svgs/stacks/Modesecurity.png';
@@ -138,6 +139,7 @@ const StacksSection = (): JSX.Element => {
             <StackRow ref={setRowRef(2)} $visible={visibleRows[2]}>
               <Stack name='Wireshark' icon={<WiresharkIcon />} count={stackCounts['Wireshark'] || 0} />
               <Stack name='Burp Suite' icon={<BurpSuiteIcon />} count={stackCounts['Burp Suite'] || 0} />
+              <Stack name='n8n' icon={<N8nIcon />} count={stackCounts['n8n'] || 0} />
             </StackRow>
           </StackItem>
           <StackItem>
@@ -322,6 +324,11 @@ const BurpSuiteIcon = styled(BurpSuiteSVG)`
   height: 4.375em;
 `;
 const ElasticStackIcon = styled(ElasticStackSVG)`
+  width: 4.375em;
+  height: 4.375em;
+`;
+
+const N8nIcon = styled(N8nSVG)`
   width: 4.375em;
   height: 4.375em;
 `;

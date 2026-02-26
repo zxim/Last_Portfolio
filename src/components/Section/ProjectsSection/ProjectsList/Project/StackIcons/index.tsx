@@ -152,6 +152,12 @@ export const MysqlIcon = ({ className }: IconProps) => (
   </IconWrapper>
 );
 
+export const N8nIcon = ({ className }: IconProps) => (
+  <IconWrapper className={className}>
+    <Image src="/svgs/stacks/n8n.svg" alt="n8n" fill />
+  </IconWrapper>
+);
+
 export const NextjsIcon = ({ className }: IconProps) => (
   <IconWrapper className={className}>
     <Image src="/svgs/stacks/nextjs.svg" alt="Next.js" fill />
