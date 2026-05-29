@@ -29,6 +29,11 @@ import { projectData } from '@/constants/project';
 import Image from 'next/image';
 import { useMemo } from 'react'; // Added useMemo
 
+const securityOps: string[] = [
+  '방화벽 (F/W)', 'WAF', 'SIEM', 'IDS', 'DRM', 'DLP', 'SWG',
+  '프린터 보안', '망연계', 'DB 접근제어', '서버 접근제어', 'VPN',
+];
+
 const StacksSection = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false);
   const [visibleRows, setVisibleRows] = useState<boolean[]>([]);
@@ -117,6 +122,19 @@ const StacksSection = (): JSX.Element => {
           sub='스택을 누르면 해당 스택이 사용된 프로젝트로 이동합니다.'
         />
         <StackList>
+          <StackItem>
+            <StackType $visible={visibleRows[7]}># Security Operations</StackType>
+            <OpsRow ref={setRowRef(7)} $visible={visibleRows[7]}>
+              <OpsHeadline>
+                현직 정보보안 담당 · <b>44대</b> 보안장비 단독 운영
+              </OpsHeadline>
+              <OpsChips>
+                {securityOps.map((s) => (
+                  <OpsChip key={s}>{s}</OpsChip>
+                ))}
+              </OpsChips>
+            </OpsRow>
+          </StackItem>
           <StackItem>
             <StackType $visible={visibleRows[0]}># Security Solutions</StackType>
             <StackRow ref={setRowRef(0)} $visible={visibleRows[0]}>
@@ -332,5 +350,54 @@ const N8nIcon = styled(N8nSVG)`
   width: 4.375em;
   height: 4.375em;
 `;
+
+const OpsRow = styled.div<{ $visible: boolean }>`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1.5em;
+
+  opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+  transform: translateY(${({ $visible }) => ($visible ? '0px' : '10px')});
+  transition: opacity 1200ms 250ms cubic-bezier(0.23, 1, 0.320, 1), transform 1200ms 250ms cubic-bezier(0.23, 1, 0.320, 1);
+`
+const OpsHeadline = styled.p`
+  margin-bottom: 1.25em;
+
+  color: #d6d6e0;
+  font-size: 1.25em;
+  font-weight: 500;
+  line-height: 1.5em;
+
+  &>b {
+    color: #ff9595;
+    font-size: 1.15em;
+    font-weight: 700;
+  }
+`
+const OpsChips = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75em;
+`
+const OpsChip = styled.span`
+  padding: 0.6em 1.1em;
+
+  border-radius: 0.6em;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(rgba(255, 255, 255, 0.01) 50%, rgba(255, 255, 255, 0.04) 100%);
+
+  color: #fff;
+  font-size: 1.05em;
+  font-weight: 500;
+  white-space: nowrap;
+
+  transition: 150ms ease-out;
+
+  &:hover {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transform: translateY(-0.15em);
+  }
+`
 
 
