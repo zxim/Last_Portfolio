@@ -33,6 +33,10 @@ import N8nImg3 from '@public/images/projects/n8n3.png';
 import N8nImg4 from '@public/images/projects/n8n4.png';
 import { StaticImageData } from 'next/image';
 import PacketIMG from '@public/images/thumbnails/packet.png';
+import SecOpsThumbImg from '@public/images/thumbnails/secops.jpg';
+import SecOpsImg1 from '@public/images/projects/secops_1.jpg';
+import SecOpsImg2 from '@public/images/projects/secops_2.jpg';
+import SecOpsImg3 from '@public/images/projects/secops_3.jpg';
 
 export interface IProjectProps {
   thumb: StaticImageData[];
@@ -91,6 +95,47 @@ export const projectData: IProjectProps[] = [
       '메일 OTP 인증 기반 사용자 식별 및 외부 유출 경로(복사/인쇄/다운로드) 원천 차단',
       'MySQL 연동을 통한 동적 화이트리스트 검증 및 비인가 협업자 자동 숙청 로직 구현',
       '자체 게이트웨이 서버 운영으로 상용 협업 솔루션 라이선스 비용 전액 절감(1인 연 70만원 → 무료)'
+    ],
+  },
+
+  // 보안장비 통합 점검·정책 자동화 (회사 프로젝트)
+  {
+    thumb: [SecOpsThumbImg, SecOpsImg1, SecOpsImg2, SecOpsImg3],
+    term: '2026.04 ~ 운영중',
+    name: '보안장비 통합 점검·정책 자동화 및 AI 리포팅',
+    url: '',
+    github: '',
+    team: '회사 프로젝트',
+    contribution: { dev: '100%', infra: '100%', security: '100%' },
+    stacks: ['React', 'Python', 'MySQL', 'Docker'],
+    issues: [
+      {
+        issue: 'API를 제공하지 않는 레거시 보안장비는 외부에서 상태·정책을 조회할 표준 인터페이스가 없어 자동 점검이 불가능했습니다.',
+        solving: '장비 내부 DB에 직접 접속해 상태·정책 테이블을 조회하는 SQL 점검 스크립트를 장비별로 작성하고, 결과를 공통 스키마로 정규화하여 API 연동 장비와 동일한 파이프라인으로 통합했습니다.'
+      },
+      {
+        issue: '장비마다 점검 항목과 출력 형식이 달라 결과를 한 번에 비교·보고하기 어려웠습니다.',
+        solving: '장비 유형별 파서를 모듈화하고 점검 이력을 MySQL 표준 스키마로 적재하여, 일·월 단위 보고서를 동일한 포맷으로 자동 생성하도록 설계했습니다.'
+      },
+      {
+        issue: '정책 점검 결과 요약에 외부(클라우드) AI를 사용하면 보안 정책·구성 정보가 외부로 유출될 위험이 있었습니다.',
+        solving: '온프레미스 로컬 AI를 연동해 정책 데이터가 내부망을 벗어나지 않도록 하고, 담당자용 1페이지 요약 리포트를 자동 생성·전달했습니다.'
+      },
+      {
+        issue: '장비별 점검 스크립트의 의존성(드라이버·클라이언트 버전)이 충돌하고, 주기가 다른 작업을 안정적으로 운영하기 어려웠습니다.',
+        solving: 'Docker로 점검 작업을 컨테이너화해 실행 환경을 격리하고, 스케줄러로 일일 로그 요약과 월간 정책 점검을 주기적으로 자동 실행했습니다.'
+      }
+    ],
+    reason: "API 연동이 가능한 장비와 불가능한 레거시 장비가 혼재된 환경을 하나의 점검 체계로 묶기 위해, 범용 자동화와 DB 제어에 강한 Python을 중심으로 설계했습니다. 점검 현황과 이력은 React 대시보드로 가시화하고 MySQL에 적재했으며, 장비별로 상이한 점검 환경을 격리·재현하기 위해 Docker로 컨테이너화했습니다. 특히 민감한 정책 데이터의 외부 유출을 막기 위해 클라우드 AI 대신 로컬 AI를 연동해 요약 리포트를 생성했습니다.",
+    learned: 'API가 없는 레거시 장비까지 포함해 이기종 보안장비를 단일 점검 체계로 통합하면서, 자동화의 핵심은 도구가 아니라 반복되는 운영 업무의 표준화임을 배웠습니다. 또한 점검 결과를 사람이 바로 의사결정할 수 있는 보고서 형태로 환원하는 과정에서, 보안 운영의 가치는 탐지뿐 아니라 전달에 있음을 체감했습니다.',
+    intro: 'API를 지원하는 보안장비는 API로, API를 지원하지 않는 레거시 장비는 서버에 직접 접속해 SQL 스크립트로 상태·정책을 점검하는 통합 자동화 플랫폼입니다. 매일 로그 점검 결과를 일일 보고서로 메일 발송하고, 월 1회 정책 점검 결과는 로컬 AI로 요약해 담당자에게 한 장짜리 리포트로 자동 전달함으로써 반복적인 수기 점검 업무를 제거했습니다.',
+    func: [
+      'API 지원 장비는 API, 미지원 레거시 장비는 서버 직접 접속·SQL 스크립트로 상태/정책 점검 통합',
+      '이기종 장비 점검 결과를 MySQL 표준 스키마로 정규화 및 이력 관리',
+      '로컬 AI(온프레미스) 연동으로 월간 정책 점검 결과를 1페이지 요약 리포트로 자동 생성·전달',
+      '일일 로그 요약 보고서 자동 생성 및 메일 발송',
+      'Docker 컨테이너화로 장비별 점검 환경 격리 및 일/월 단위 스케줄 자동 실행',
+      'React 기반 점검 현황 대시보드 제공'
     ],
   },
 
